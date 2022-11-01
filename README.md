@@ -1,9 +1,7 @@
-# Juniper-DevOps
-Juniper DevOps Certification information
-
+# Juniper DevOps
 
 [Course Outline](https://learningportal.juniper.net/juniper/resources/courses/__secure/jol_od/jncia-devops/IJAUT_JOL/IJAUT_OL_CH01/story_content/external_files/Course%20Outline.pdf)  
-[Exam Objectives](https://www.juniper.net/us/en/training/certification/tracks/devops/jncia-devops.html?tab=jnciadevops) 
+[Exam Objectives](https://www.juniper.net/us/en/training/certification/tracks/devops/jncia-devops.html?tab=jnciadevops) - Click [Here](https://github.com/rikosintie/Juniper-DevOps/blob/main/images/Juniper-DevOps-Exam-Obj.png) for a graphic of the objectivces  
 
 
 **Juniper Knowledgebase Articles**
