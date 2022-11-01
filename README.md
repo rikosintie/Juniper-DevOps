@@ -56,8 +56,13 @@ To see which arguments are required, see the Command Samples and Syntax section 
 **Protip** - NETCONF must be enabled (it runs on port 830), before PyE can connect. Use this command to verify:
 `show configuration system services netconf`
 
+**Protip 2** - A user account must be setup to allow the remote ssh session to connect to the switch. Use the following to determine if an account exists:
+```
+[edit system login]  
+user@host# show user account-name
+```
 
-###Command Samples and Syntax
+### Command Samples and Syntax
 
 When running the PyEZ apps off-box, from the Ubuntu Linux server, additional parameters must be included.  
 
