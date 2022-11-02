@@ -62,8 +62,28 @@ A user account must be setup to allow the remote ssh session to connect to the s
 ```
 [edit system login]  
 user@host# show user account-name 
-```
+```  
+**Protip 3** 
+Copy your ssh public key to the Ubuntu VM so that you can ssh without a passord 
+`ssh-copy-id -i ~/.ssh/juniper_ed25519_key.pub -p 33010 jcluser@66.129.234.214`  
 
+jcluser is the username for all the lab equipment. The passord is `Juniper!1`
+
+Once the copy finishes, log in using:
+`ssh -p 33010 jcluser@66.129.234.214`  
+
+If it works you are done. If not, log in using the password and run the following to see if the key was copied:
+
+```
+jcluser@pyez-vm:~$ cd .ssh/
+jcluser@pyez-vm:~/.ssh$ ls -l
+total 8
+-rw------- 1 jcluser jcluser 105 Nov  2 10:11 authorized_keys
+-rw-r--r-- 1 jcluser jcluser 222 Sep 10  2018 known_hosts
+jcluser@pyez-vm:~/.ssh$ cat authorized_keys
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDoDOV0IobtYAgQXMDSvNPHVH7wVsD3iI9QBcF14hYUL mhubbard@HP8600-4.local
+```  
+If you don't understand what I'm talking about follow this [article](https://linuxhint.com/use-ssh-copy-id-command/). You should definitely learn how to use ssh keys if you want to be a DevOps engineer
 
 ### Command Samples and Syntax
 
@@ -106,6 +126,7 @@ The outbound SSH feature allows the initiation of an SSH session between devices
 
 ### PyEZ
 [Welcome to Junos PyEZ’s documentation!](https://junos-pyez.readthedocs.io/en/2.6.5/index.html)  - Module documentation  
+[Junos PyEZ Source Code](https://github.com/Juniper/py-junos-eznc) - Github repo for PyEZ source code
 
 This table lists the packages and libraries required to install Junos PyEZ on a CentOS Linux host.  
 
@@ -120,3 +141,12 @@ This table lists the packages and libraries required to install Junos PyEZ on a 
 | **libffi-devel** | Contains a foreign function interface that enables code written in one language to call codewritten in another language.|
 | **openssl-dev** | The SSL development toolkit.|
 | **redhat-rpmconfig** | Custom RedHat macros used to build RedHat Package Manager (RPM) packages |  
+
+**Copy your public key to the junos device**  
+```
+┌─[mhubbard@HP8600-150] - [~/GoogleDrive/04_Tools/AutoPWN-Suite] - [2652]
+└─[$] scp ~/.ssh/juniper_ed25519_key vector@66.129.234.214:/tmp
+```  
+
+
+
