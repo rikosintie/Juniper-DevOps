@@ -25,12 +25,13 @@ A file called a **document type definition**, or DTD, lists every tag element th
 [XSLT Overview](https://www.juniper.net/documentation/us/en/software/junos/automation-scripting/topics/concept/junos-script-automation-xslt-overview.html) - Commit Scripts, operation scripts and SNMP scripts can be written in eXtensible Stylesheet Language Tranformations (XSLT).  
 [Automation Scripting User Guide](https://www.juniper.net/documentation/us/en/software/junos/automation-scripting/index.html)  
 [Junos XML API Explorer - Configuration Tags](https://apps.juniper.net/xmlapi/#)  
-
+[Junos XML Management Protocol Developer Guide](https://www.juniper.net/documentation/us/en/software/junos/junos-xml-protocol/index.html)  
 
 
 ### Virtual Labs
 * [Virtual labs for automation](https://jlabs.juniper.net/vlabs/portal/index.page) - Scroll down to the automation section.  
-* [vLab Sandbox: PyEZ for Junos – Instructions](https://jlabs.juniper.net/vlabs/portal/pyez-for-junos/pyez-for-junos-instructions.page) - Instructions for running the PyEZ scripts in the lab.
+* [vLab Sandbox: PyEZ for Junos – Instructions](https://jlabs.juniper.net/vlabs/portal/pyez-for-junos/pyez-for-junos-instructions.page) - Instructions for running the PyEZ scripts in the lab.  
+* [Juniper vLabs User Guide](https://jlabs.juniper.net/assets/pdf/vlabs/vlabs-ug.pdf)  
 
 Vlab instructions  
 **On-box (vMX device)**  
@@ -54,13 +55,15 @@ To see which arguments are required, see the Command Samples and Syntax section 
 `python <app-name> -h`  
 
 **Protip** - NETCONF must be enabled (it runs on port 830), before PyE can connect. Use this command to verify:
-`show configuration system services netconf`
+`show configuration system services netconf`  
 
-**Protip 2** - A user account must be setup to allow the remote ssh session to connect to the switch. Use the following to determine if an account exists:
+**Protip 2**
+A user account must be setup to allow the remote ssh session to connect to the switch. Use the following to determine if an account exists:
 ```
 [edit system login]  
-user@host# show user account-name
+user@host# show user account-name 
 ```
+
 
 ### Command Samples and Syntax
 
@@ -89,3 +92,31 @@ ansible-playbook install-config-to-device.yml
 cd PLAYBOOK/  
 ansible-playbook install-ansible2-6-4-to-device.yml  
 ansible-playbook install-script-to-device.yml  
+
+### Setup the Juniper for Outbound SSH  
+The outbound SSH feature allows the initiation of an SSH session between devices running Junos OS and Network and System Management servers where client-initiated TCP/IP connections are blocked (for example, when the device is behind a firewall). 
+
+[Outbound setup](https://www.juniper.net/documentation/us/en/software/junos/junos-xml-protocol/topics/task/junos-xml-protocol-session-prerequisites.html#id-prerequisites-for-outbound-ssh-connections)
+
+### Language Links
+[NETCONF Library](https://github.com/ncclient/ncclient)  
+[Junos PyEZ library](https://github.com/Juniper/py-junos-eznc)  
+[JAVA toolkit for NETCONF server](https://github.com/Juniper/netconf-java)  
+[NETCONF Ruby gem Installation](https://github.com/Juniper/net-netconf)
+
+### PyEZ
+[Welcome to Junos PyEZ’s documentation!](https://junos-pyez.readthedocs.io/en/2.6.5/index.html)  - Module documentation  
+
+This table lists the packages and libraries required to install Junos PyEZ on a CentOS Linux host.  
+
+| **Packages** | 			**Description** |  
+|    :---:     |                 :---      |  
+| **pip**      | A utility used to install packages and modules from the Python package index.|
+| **gcc**      | The GNU compiler collection of utilities and libraries.|
+| **python-devel** |Header files, a static library and development tools for building Python modules, extending the Python interpreter, or embedding Python inapplications.|
+| **libxml2-devel** | Development files for the GNOME XML library.|
+| **libxslt-dev** | XML stylesheet transformation library development files.|
+| **libssl-dev** | Part of the OpenSSL project's implementation of the SSL and Transport Layer Security (TLS) cryptographic protocols for secure communication over the Internet.|
+| **libffi-devel** | Contains a foreign function interface that enables code written in one language to call codewritten in another language.|
+| **openssl-dev** | The SSL development toolkit.|
+| **redhat-rpmconfig** | Custom RedHat macros used to build RedHat Package Manager (RPM) packages |  
