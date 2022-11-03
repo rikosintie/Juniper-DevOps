@@ -19,6 +19,8 @@ This table lists the packages and libraries required to install Junos PyEZ on a 
 | **redhat-rpmconfig** | Custom RedHat macros used to build RedHat Package Manager (RPM) packages |  
 
 **Copy your public key to the junos device**  
+Once the lab is active:
+
 ```
 ┌─[mhubbard@HP8600-150] - [~/GoogleDrive/04_Tools/AutoPWN-Suite]
 └─[$] scp ~/.ssh/juniper_ed25519_key vector@66.129.234.214:/tmp
@@ -41,5 +43,60 @@ print(uptime[1])
 print(sup_info[1])
 ss.close()
 
+```  
+
+**Shell Script to list messages log file**  
+``` 
+from jnpr.junos import Device
+from jnpr.junos.utils.start_shell import StartShell
+
+dev = Device(host='192.168.10.162', port='22', user='vector', password='H3lpd3sk')
+
+ss = StartShell(dev)
+ss.open()
+sofwareimage = ss.run('ls -ahl /var/log/messages')
+print(sofwareimage[1])
+ss.close()
+
 ```
+
+**Script to SCP the messages log to the local computer**  
+```
+from jnpr.junos import Device
+from jnpr.junos.utils.scp import SCP
+
+dev = Device(host='192.168.10.162', port='22', user='vector', password='H3lpd3sk')
+with SCP(dev, progress=True) as scp:
+    scp.get('/var/log/messages', local_path='/users/mhubbard/Downloads/')
+
+```
+
+**Script to copy a file from the desktop to the switch /vat/tmp folder**  
+```
+from jnpr.junos.utils.scp import scp
+from jnpr.junos import Device
+
+dev = Device(host='66.129.234.214', port='33005',
+             user='jcluser', password='Juniper!1')
+with scp(dev, progress=True) as scp:
+    scp.put('/users/mhubbard/Downloads/test.json', remote_path='/var/tmp')
+
+```  
+
+**Script to reboot the device**  
+```
+from jnpr.junos import Device
+from jnpr.junos.utils.sw import SW
+
+with Device(host='192.168.10.162', user='root', password='vPd4weOx62CfM12') as dev:
+    sw = SW(dev)
+    # immediate reboot
+    print(sw.reboot())
+    #  reboot in 5 minutes
+    #  print(sw.reboot(in_min='5'))
+    # reboot in at
+    #  print(sw.reboot(at='23:00'))
+
+```
+
 
